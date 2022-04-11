@@ -1,0 +1,22 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: todoappreactaspnetcore
+services:
+- name: todoappreactaspnetcore
+  project: src/TodoAppReactAspNetCore/TodoAppReactAspNetCore.csproj
+  external: true
+  bindings:
+    
+    - port: 5103
+      protocol: http
+      name: http
+    - port: 7288
+      protocol: https
+      name: aspnetcore
+    - port: 44488
+      protocol: https
+      name: spa 
