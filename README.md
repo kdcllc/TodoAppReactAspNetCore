@@ -7,6 +7,9 @@ https://localhost:44488/
     npm install npm@latest -g
 
     dotnet tool install -g Microsoft.Tye --prerelease
+
+    # "lint": "eslint \"./src/**/*.{js,ts,tsx}\""
+    npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 ```
 
 ## DotNetCore
