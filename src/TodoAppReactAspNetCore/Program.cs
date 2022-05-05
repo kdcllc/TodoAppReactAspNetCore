@@ -46,6 +46,6 @@ app.MapGet("/test", async context =>
     await context.Response.WriteAsync("Hello World!");
 });
 
-app.MapFallbackToFile("/todoapp/index.html");
+//app.MapFallbackToFile("/todoapp/index.html");
 
 await app.RunAsync();
