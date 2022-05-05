@@ -3,6 +3,11 @@ using Microsoft.AspNetCore.HttpOverrides;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Add services to the container.
 
 builder.Services.AddControllersWithViews();
 
@@ -20,6 +25,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//app.UsePathBase("/todoapp");
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseForwardedHeaders();
 
 app.UseHttpsRedirection();
@@ -32,6 +41,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
+app.MapGet("/test", async context =>
+{
+    await context.Response.WriteAsync("Hello World!");
+});
+
 app.MapFallbackToFile("/todoapp/index.html");
 
-app.Run();
+await app.RunAsync();

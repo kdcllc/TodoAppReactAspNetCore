@@ -7,11 +7,60 @@
     dotnet tool install -g Microsoft.Tye --prerelease
 ```
 
+## DotNetCore
+
+### Enable Open Api
+
 ```bash
-$env:PUBLIC_URL="todoapp"
-dotnet publish -o out
-dotnet TodoAppReactAspNetCore.dll    
+    # open api support
+    dotnet add package Swashbuckle.AspNetCore --version 6.1.*
 ```
+
+`Program.cs`
+
+```csharp
+    // Add services to the container.
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+```
+
+```bash
+    # open api support
+    dotnet add package Swashbuckle.AspNetCore --version 6.1.*
+
+
+    # ef core libraries
+    dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.*
+    dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 6.3.*
+
+```
+
+## Testing production deployment
+
+```bash
+    dotnet publish -o out
+    dotnet TodoAppReactAspNetCore.dll
+```
+
+`spa.proxy.json`
+
+```json
+{
+  // https://github.com/dotnet/aspnetcore/blob/f9ae0f5d30be2de3c0de61b5673bd8873231d70a/src/Middleware/Spa/SpaProxy/src/SpaDevelopmentServerOptions.cs
+  "SpaProxyServer": {
+    "ServerUrl": "https://localhost:44488"
+  }
+}
+```
+
 ## Tooling
 
 - [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
